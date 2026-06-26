@@ -1,0 +1,4 @@
+services:
+- type: web
+  name: gmb-ai-manager
+  env: node
