@@ -1,3 +1,15 @@
-# GMB AI Manager Production Template
+# Mercury GMB AI Manager
 
-Template project for Claude + Google Business Profile + Google Sheets + Render.
+Production AI Manager for Google Business Profile
+
+## Features
+
+- Gemini AI
+- Google Business
+- Review Reply
+- Auto Posts
+- SEO Audit
+- WhatsApp
+- Google Sheets
+
+Running on Render.
