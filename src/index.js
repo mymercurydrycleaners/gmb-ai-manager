@@ -1,14 +1,15 @@
 require("dotenv").config();
 
 const express = require("express");
-const config = require("./config");
 const routes = require("./routes");
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use("/", routes);
 
-app.listen(config.PORT, () => {
-  console.log(`✅ GMB AI Manager running on port ${config.PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ GMB AI Manager running on port ${PORT}`);
 });
