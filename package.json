@@ -1,13 +1,33 @@
 {
-  "name": "gmb-ai-manager-production",
-  "version": "1.2.0",
+  "name": "gmb-ai-manager",
+  "version": "3.0.0",
+  "description": "Mercury GMB AI Manager",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
+  "keywords": [
+    "google-business",
+    "gemini",
+    "seo",
+    "whatsapp",
+    "ai"
+  ],
+  "author": "Mercury Dry Cleaners",
+  "license": "MIT",
   "dependencies": {
     "@google/genai": "^1.15.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "node-cron": "^4.2.1",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
