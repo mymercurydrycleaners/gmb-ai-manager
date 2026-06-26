@@ -1,16 +1,8 @@
-const express = require("express");
-const { google } = require("googleapis");
-
-const router = express.Router();
-
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  "https://gmb-ai-manager.onrender.com/oauth/callback"
-);
-
-// Login Route
 router.get("/login", (req, res) => {
+
+  console.log("CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
+  console.log("CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET ? "FOUND" : "MISSING");
+
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     prompt: "consent",
@@ -19,28 +11,7 @@ router.get("/login", (req, res) => {
     ]
   });
 
+  console.log(url);
+
   res.redirect(url);
 });
-
-// Callback Route
-router.get("/callback", async (req, res) => {
-  try {
-    const { code } = req.query;
-
-    const { tokens } = await oauth2Client.getToken(code);
-
-    res.json({
-      success: true,
-      refresh_token: tokens.refresh_token,
-      access_token: tokens.access_token
-    });
-
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      error: err.message
-    });
-  }
-});
-
-module.exports = router;
