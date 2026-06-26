@@ -1,45 +1,37 @@
-const express=require("express");
+const express = require("express");
+const router = express.Router();
 
-const router=express.Router();
+const { askGemini } = require("../ai/gemini");
 
-const {askGemini}=require("../ai/gemini");
+router.get("/", async (req, res) => {
+  try {
+    const q = req.query.q;
 
-const asyncHandler=require("../middleware/asyncHandler");
+    if (!q) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing query parameter ?q="
+      });
+    }
 
-router.get("/",
+    const answer = await askGemini(q);
 
-asyncHandler(async(req,res)=>{
+    res.json({
+      success: true,
+      question: q,
+      answer
+    });
 
-const q=req.query.q;
+  } catch (err) {
 
-if(!q){
+    console.error(err);
 
-return res.status(400).json({
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
 
-success:false,
-
-message:"Missing ?q="
-
+  }
 });
 
-}
-
-const answer=
-
-await askGemini(q);
-
-res.json({
-
-success:true,
-
-question:q,
-
-answer
-
-});
-
-})
-
-);
-
-module.exports=router;
+module.exports = router;
