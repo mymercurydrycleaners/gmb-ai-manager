@@ -27,4 +27,4 @@ router.use("/ask", askRoute);
 router.use("/status", statusRoute);
 
 module.exports = router;
-router.use("/google", require("./google"));
+
