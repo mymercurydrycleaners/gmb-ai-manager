@@ -1,23 +1,14 @@
-const http = require("http");
+require("dotenv").config();
 
-const PORT = process.env.PORT || 3000;
+const express = require("express");
+const config = require("./config");
+const routes = require("./routes");
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, {
-    "Content-Type": "application/json",
-  });
+const app = express();
 
-  res.end(
-    JSON.stringify({
-      success: true,
-      app: "GMB AI Manager",
-      status: "Running",
-      version: "1.0.0",
-      message: "Welcome to GMB AI Manager 🚀"
-    })
-  );
-});
+app.use(express.json());
+app.use("/", routes);
 
-server.listen(PORT, () => {
-  console.log(`✅ GMB AI Manager is running on port ${PORT}`);
+app.listen(config.PORT, () => {
+  console.log(`✅ GMB AI Manager running on port ${config.PORT}`);
 });
