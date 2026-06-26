@@ -5,12 +5,9 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.json({
     success: true,
-    version: "3.1.0",
-    server: "Running",
-    gemini: process.env.GEMINI_API_KEY ? "Connected" : "Missing",
-    uptime: process.uptime(),
-    node: process.version,
-    timestamp: new Date().toISOString()
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ? "FOUND" : "MISSING",
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET ? "FOUND" : "MISSING",
+    GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN ? "FOUND" : "MISSING"
   });
 });
 
