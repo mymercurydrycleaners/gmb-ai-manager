@@ -1,57 +1,38 @@
-const express=require("express");
+const express = require("express");
+const router = express.Router();
 
-const router=express.Router();
+const { generatePost } = require("../ai/postGenerator");
 
-const {
+router.get("/", async (req, res) => {
 
-generatePost
+  try {
 
-}=require("../ai/postGenerator");
+    const topic = req.query.topic;
 
-router.get("/",async(req,res)=>{
+    if (!topic) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing ?topic="
+      });
+    }
 
-try{
+    const post = await generatePost(topic);
 
-const topic=req.query.topic;
+    res.json({
+      success: true,
+      topic,
+      post
+    });
 
-if(!topic){
+  } catch (err) {
 
-return res.status(400).json({
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
 
-success:false,
-
-message:"Missing topic"
-
-});
-
-}
-
-const post=
-
-await generatePost(topic);
-
-res.json({
-
-success:true,
-
-post
+  }
 
 });
 
-}
-
-catch(err){
-
-res.status(500).json({
-
-success:false,
-
-message:err.message
-
-});
-
-}
-
-});
-
-module.exports=router;
+module.exports = router;
