@@ -2,9 +2,12 @@ const express = require("express");
 
 const askRoute = require("./ask");
 const statusRoute = require("./status");
+const googleRoute = require("./google");
+const oauthRoute = require("./oauth");
 
 const router = express.Router();
 
+// Home
 router.get("/", (req, res) => {
   res.json({
     success: true,
@@ -14,6 +17,7 @@ router.get("/", (req, res) => {
   });
 });
 
+// Health
 router.get("/health", (req, res) => {
   res.json({
     success: true,
@@ -22,10 +26,10 @@ router.get("/health", (req, res) => {
   });
 });
 
+// Routes
 router.use("/ask", askRoute);
-
 router.use("/status", statusRoute);
+router.use("/google", googleRoute);
+router.use("/oauth", oauthRoute);
 
 module.exports = router;
-const googleRoute = require("./google");
-router.use("/google", googleRoute);
