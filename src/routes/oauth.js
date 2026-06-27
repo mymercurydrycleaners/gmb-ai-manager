@@ -18,7 +18,30 @@ router.get("/debug-client", (req, res) => {
       : 0
   });
 });
+// Debug
+router.get("/debug-client", (req, res) => {
+  res.json({
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecretLength: process.env.GOOGLE_CLIENT_SECRET
+      ? process.env.GOOGLE_CLIENT_SECRET.length
+      : 0
+  });
+});
 
+// 👇 ISKE BILKUL NICHE ADD KARO
+router.get("/env-check", (req, res) => {
+  res.json({
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecretLength: process.env.GOOGLE_CLIENT_SECRET?.length,
+    refreshTokenStart: process.env.GOOGLE_REFRESH_TOKEN?.substring(0, 15),
+    refreshTokenLength: process.env.GOOGLE_REFRESH_TOKEN?.length
+  });
+});
+
+// Login
+router.get("/login", (req, res) => {
+  ...
+});
 // Login
 router.get("/login", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
