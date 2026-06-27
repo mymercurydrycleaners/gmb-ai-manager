@@ -9,16 +9,7 @@ const oauth2Client = new google.auth.OAuth2(
   "https://gmb-ai-manager.onrender.com/oauth/callback"
 );
 
-// Debug
-router.get("/debug-client", (req, res) => {
-  res.json({
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecretLength: process.env.GOOGLE_CLIENT_SECRET
-      ? process.env.GOOGLE_CLIENT_SECRET.length
-      : 0
-  });
-});
-// Debug
+// Debug Client
 router.get("/debug-client", (req, res) => {
   res.json({
     clientId: process.env.GOOGLE_CLIENT_ID,
@@ -28,7 +19,7 @@ router.get("/debug-client", (req, res) => {
   });
 });
 
-// 👇 ISKE BILKUL NICHE ADD KARO
+// Environment Check
 router.get("/env-check", (req, res) => {
   res.json({
     clientId: process.env.GOOGLE_CLIENT_ID,
@@ -38,10 +29,6 @@ router.get("/env-check", (req, res) => {
   });
 });
 
-// Login
-router.get("/login", (req, res) => {
-  ...
-});
 // Login
 router.get("/login", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
