@@ -1,3 +1,4 @@
+const reviewsRoute = require("./reviews");
 const express = require("express");
 
 const askRoute = require("./ask");
@@ -33,3 +34,4 @@ router.use("/google", googleRoute);
 router.use("/oauth", oauthRoute);
 
 module.exports = router;
+router.use("/reviews", reviewsRoute);
