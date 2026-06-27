@@ -1,3 +1,4 @@
+router.use("/reviews", reviewsRoute);
 const express = require("express");
 
 const askRoute = require("./ask");
