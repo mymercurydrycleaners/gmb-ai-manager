@@ -1,10 +1,10 @@
-const reviewsRoute = require("./reviews");
 const express = require("express");
 
 const askRoute = require("./ask");
 const statusRoute = require("./status");
 const googleRoute = require("./google");
 const oauthRoute = require("./oauth");
+const reviewsRoute = require("./reviews");
 
 const router = express.Router();
 
@@ -32,6 +32,7 @@ router.use("/ask", askRoute);
 router.use("/status", statusRoute);
 router.use("/google", googleRoute);
 router.use("/oauth", oauthRoute);
-
-module.exports = router;
 router.use("/reviews", reviewsRoute);
+
+// ALWAYS LAST
+module.exports = router;
