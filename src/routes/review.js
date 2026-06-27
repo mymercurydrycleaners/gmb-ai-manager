@@ -1,34 +1,38 @@
 const express = require("express");
+
 const router = express.Router();
 
-const { generateReply } = require("../ai/reviewReply");
+const { generateReply } = require("../ai/reviewGenerator");
 
-router.get("/", async (req, res) => {
+router.post("/generate", async (req, res) => {
 
   try {
 
-    const review = req.query.review;
+    const { review, rating } = req.body;
 
     if (!review) {
+
       return res.status(400).json({
         success: false,
-        message: "Missing ?review="
+        message: "Review is required"
       });
+
     }
 
-    const reply = await generateReply(review);
+    const reply = await generateReply(review, rating);
 
     res.json({
       success: true,
       review,
-      reply
+      rating,
+      aiReply: reply
     });
 
   } catch (err) {
 
     res.status(500).json({
       success: false,
-      message: err.message
+      error: err.message
     });
 
   }
