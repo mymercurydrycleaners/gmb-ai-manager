@@ -1,4 +1,3 @@
-router.use("/reviews", reviewsRoute);
 const express = require("express");
 
 const askRoute = require("./ask");
@@ -35,5 +34,4 @@ router.use("/google", googleRoute);
 router.use("/oauth", oauthRoute);
 router.use("/reviews", reviewsRoute);
 
-// ALWAYS LAST
 module.exports = router;
