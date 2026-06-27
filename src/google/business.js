@@ -1,3 +1,4 @@
+console.log("NEW BUSINESS.JS LOADED");
 const { google } = require("googleapis");
 
 async function getBusinessInfo() {
