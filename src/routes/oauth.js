@@ -8,6 +8,8 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_SECRET,
   "https://gmb-ai-manager.onrender.com/oauth/callback"
 );
+
+// Debug
 router.get("/debug-client", (req, res) => {
   res.json({
     clientId: process.env.GOOGLE_CLIENT_ID,
@@ -16,3 +18,39 @@ router.get("/debug-client", (req, res) => {
       : 0
   });
 });
+
+// Login
+router.get("/login", (req, res) => {
+  const url = oauth2Client.generateAuthUrl({
+    access_type: "offline",
+    prompt: "consent",
+    scope: [
+      "https://www.googleapis.com/auth/business.manage"
+    ]
+  });
+
+  res.redirect(url);
+});
+
+// Callback
+router.get("/callback", async (req, res) => {
+  try {
+    const { code } = req.query;
+
+    const { tokens } = await oauth2Client.getToken(code);
+
+    res.json({
+      success: true,
+      refresh_token: tokens.refresh_token,
+      access_token: tokens.access_token
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
+});
+
+module.exports = router;
