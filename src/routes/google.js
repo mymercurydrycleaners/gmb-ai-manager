@@ -69,3 +69,4 @@ router.get("/reviews", async (req, res) => {
 });
 
 module.exports = router;
+const { replyToReview } = require("../google/replies");
