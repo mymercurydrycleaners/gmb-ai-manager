@@ -70,3 +70,24 @@ router.get("/reviews", async (req, res) => {
 
 module.exports = router;
 const { replyToReview } = require("../google/replies");
+router.post("/reply", async (req, res) => {
+  try {
+
+    const { reviewName, reply } = req.body;
+
+    const result = await replyToReview(
+      reviewName,
+      reply
+    );
+
+    res.json(result);
+
+  } catch (err) {
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
+  }
+});
