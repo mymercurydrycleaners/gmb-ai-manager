@@ -1,34 +1,36 @@
-const OpenAI = require("openai");
+const { GoogleGenAI } = require("@google/genai");
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY
 });
 
-async function generateReply(review) {
+async function generateReply(review, rating = 5) {
 
   const prompt = `
-You are the customer support manager of My Mercury Dry Cleaners.
+You are the owner of My Mercury Dry Cleaners.
 
-Write a short, warm and professional reply.
+Write a professional reply.
 
-Review:
+Rating: ${rating}
+
+Customer Review:
 ${review}
 
-Reply:
+Rules:
+
+- Maximum 60 words.
+- Friendly.
+- Professional.
+- Thank the customer.
+- Never use emojis unless appropriate.
 `;
 
-  const response = await client.chat.completions.create({
-    model: "gpt-4.1-mini",
-    messages: [
-      {
-        role: "user",
-        content: prompt
-      }
-    ],
-    temperature: 0.7
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt
   });
 
-  return response.choices[0].message.content;
+  return response.text;
 }
 
 module.exports = {
