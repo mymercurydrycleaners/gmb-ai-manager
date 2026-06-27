@@ -1,3 +1,5 @@
+const { google } = require("googleapis");
+console.log("✅ NEW BUSINESS.JS LOADED");
 console.log("NEW BUSINESS.JS LOADED");
 const { google } = require("googleapis");
 
