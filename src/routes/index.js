@@ -1,4 +1,3 @@
-```javascript
 const express = require("express");
 
 const askRoute = require("./ask");
@@ -40,4 +39,3 @@ router.use("/dashboard", dashboardRoute);
 router.use("/analytics", analyticsRoute);
 
 module.exports = router;
-```
