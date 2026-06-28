@@ -1,37 +1,32 @@
 const express = require("express");
+
 const router = express.Router();
 
-const { generatePost } = require("../ai/postGenerator");
+const { generatePost } = require("../posts/generator");
+const { publishPost } = require("../posts/publisher");
 
-router.get("/", async (req, res) => {
+router.get("/generate", async (req, res) => {
 
-  try {
+  const type = req.query.type || "tips";
 
-    const topic = req.query.topic;
+  const post = generatePost(type);
 
-    if (!topic) {
-      return res.status(400).json({
-        success: false,
-        message: "Missing ?topic="
-      });
-    }
+  res.json({
+    success: true,
+    post
+  });
 
-    const post = await generatePost(topic);
+});
 
-    res.json({
-      success: true,
-      topic,
-      post
-    });
+router.get("/publish", async (req, res) => {
 
-  } catch (err) {
+  const type = req.query.type || "tips";
 
-    res.status(500).json({
-      success: false,
-      message: err.message
-    });
+  const post = generatePost(type);
 
-  }
+  const result = await publishPost(post);
+
+  res.json(result);
 
 });
 
