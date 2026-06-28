@@ -9,6 +9,7 @@ const dashboardRoute = require("./dashboard");
 const analyticsRoute = require("./analytics");
 const postsRoute = require("./posts");
 const settingsRoute = require("./settings");
+const aiRoute = require("./ai");
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get("/", (req, res) => {
   });
 });
 
-// Health Check
+// Health
 router.get("/health", (req, res) => {
   res.json({
     success: true,
@@ -41,6 +42,7 @@ router.use("/dashboard", dashboardRoute);
 router.use("/analytics", analyticsRoute);
 router.use("/posts", postsRoute);
 router.use("/settings", settingsRoute);
+router.use("/ai", aiRoute);
 
 // 404
 router.use((req, res) => {
