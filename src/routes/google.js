@@ -1,73 +1,50 @@
-const express = require("express");
+const oauth2Client = require("./client");
+const { getAccounts } = require("./accounts");
 
-const router = express.Router();
+async function getLocations() {
 
-const { getBusinessInfo } = require("../google/business");
-const { getGoogleStatus } = require("../google/oauth");
-const { getAccounts } = require("../google/accounts");
-const { getLocations } = require("../google/locations");
-
-// Google Status
-router.get("/status", (req, res) => {
-  res.json({
-    success: true,
-    google: getGoogleStatus()
-  });
-});
-
-// Business Information
-router.get("/business", async (req, res) => {
   try {
-    const result = await getBusinessInfo();
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      error: err.message
+
+    const accountsData = await getAccounts();
+
+    if (
+      !accountsData.accounts ||
+      accountsData.accounts.length === 0
+    ) {
+      return {
+        success: false,
+        message: "No Google Business account found."
+      };
+    }
+
+    const account = accountsData.accounts[0];
+
+    const response = await oauth2Client.request({
+      url:
+        "https://mybusinessbusinessinformation.googleapis.com/v1/" +
+        account.name +
+        "/locations"
     });
-  }
-});
 
-// Google Accounts
-router.get("/accounts", async (req, res) => {
-  try {
-    const data = await getAccounts();
-
-    res.json({
+    return {
       success: true,
-      data
-    });
+      account: account.name,
+      locations: response.data.locations || []
+    };
 
   } catch (err) {
 
-    res.status(500).json({
+    return {
       success: false,
       error: err.message,
       details: err.response?.data || null
-    });
-
-  }
-});
-
-// Google Locations
-router.get("/locations", async (req, res) => {
-
-  try {
-
-    const data = await getLocations();
-
-    res.json(data);
-
-  } catch (err) {
-
-    res.status(500).json({
-      success: false,
-      error: err.message
-    });
+    };
 
   }
 
-});
+}
 
-module.exports = router;
+module.exports = {
+  getLocations
+};
 
