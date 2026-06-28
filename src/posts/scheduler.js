@@ -1,32 +1,30 @@
 const cron = require("node-cron");
 const { generatePost } = require("./generator");
+const { publishPost } = require("./publisher");
 
 function startPostScheduler() {
 
-  console.log("✅ Google Post Scheduler Started");
+  console.log("✅ Mercury Post Scheduler Started");
 
-  // Monday 10 AM
-  cron.schedule("0 10 * * 1", () => {
+  cron.schedule("0 10 * * 1", async () => {
+
     const post = generatePost("tips");
+    await publishPost(post);
 
-    console.log("Weekly Tip");
-    console.log(post);
   });
 
-  // Wednesday 10 AM
-  cron.schedule("0 10 * * 3", () => {
+  cron.schedule("0 10 * * 3", async () => {
+
     const post = generatePost("offers");
+    await publishPost(post);
 
-    console.log("Weekly Offer");
-    console.log(post);
   });
 
-  // Saturday 10 AM
-  cron.schedule("0 10 * * 6", () => {
-    const post = generatePost("festivals");
+  cron.schedule("0 10 * * 6", async () => {
 
-    console.log("Weekend Post");
-    console.log(post);
+    const post = generatePost("festivals");
+    await publishPost(post);
+
   });
 
 }
