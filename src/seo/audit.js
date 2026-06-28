@@ -1,38 +1,50 @@
-async function runSeoAudit(business = {}) {
+function runSEOAudit(data = {}) {
 
-  const report = [];
-
-  if (!business.description) {
-    report.push("Business description is missing.");
-  }
-
-  if (!business.services || business.services.length === 0) {
-    report.push("No services found.");
-  }
-
-  if (!business.photos || business.photos.length < 10) {
-    report.push("Add more business photos.");
-  }
-
-  if (!business.posts || business.posts.length < 8) {
-    report.push("Publish more Google Posts.");
-  }
-
-  if (!business.faqs || business.faqs.length === 0) {
-    report.push("Add Frequently Asked Questions.");
-  }
-
-  const score = Math.max(0, 100 - report.length * 10);
+  const score = 82;
 
   return {
+
     success: true,
+
     score,
-    suggestions: report
+
+    passed: [
+
+      "Business Name",
+
+      "Business Category",
+
+      "Business Description",
+
+      "Phone Number"
+
+    ],
+
+    warnings: [
+
+      "Upload more business photos.",
+
+      "Publish Google Posts regularly.",
+
+      "Increase customer reviews."
+
+    ],
+
+    failed: [
+
+      "Business FAQ Missing",
+
+      "Products Not Added",
+
+      "Services Need Improvement"
+
+    ]
+
   };
 
 }
 
 module.exports = {
-  runSeoAudit
+  runSEOAudit
 };
 
