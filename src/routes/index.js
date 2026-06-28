@@ -7,6 +7,8 @@ const oauthRoute = require("./oauth");
 const reviewsRoute = require("./reviews");
 const dashboardRoute = require("./dashboard");
 const analyticsRoute = require("./analytics");
+const postsRoute = require("./posts");
+const settingsRoute = require("./settings");
 
 const router = express.Router();
 
@@ -15,7 +17,7 @@ router.get("/", (req, res) => {
   res.json({
     success: true,
     app: "Mercury GMB AI Manager",
-    version: "3.2.0",
+    version: "4.0.0",
     status: "Running"
   });
 });
@@ -37,5 +39,16 @@ router.use("/oauth", oauthRoute);
 router.use("/reviews", reviewsRoute);
 router.use("/dashboard", dashboardRoute);
 router.use("/analytics", analyticsRoute);
+router.use("/posts", postsRoute);
+router.use("/settings", settingsRoute);
+
+// 404
+router.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route Not Found"
+  });
+});
 
 module.exports = router;
+
