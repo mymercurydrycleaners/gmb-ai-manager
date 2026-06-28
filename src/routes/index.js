@@ -1,3 +1,4 @@
+```javascript
 const express = require("express");
 
 const askRoute = require("./ask");
@@ -6,6 +7,7 @@ const googleRoute = require("./google");
 const oauthRoute = require("./oauth");
 const reviewsRoute = require("./reviews");
 const dashboardRoute = require("./dashboard");
+const analyticsRoute = require("./analytics");
 
 const router = express.Router();
 
@@ -14,12 +16,12 @@ router.get("/", (req, res) => {
   res.json({
     success: true,
     app: "Mercury GMB AI Manager",
-    version: "3.0.0",
+    version: "3.1.0",
     status: "Running"
   });
 });
 
-// Health
+// Health Check
 router.get("/health", (req, res) => {
   res.json({
     success: true,
@@ -35,5 +37,7 @@ router.use("/google", googleRoute);
 router.use("/oauth", oauthRoute);
 router.use("/reviews", reviewsRoute);
 router.use("/dashboard", dashboardRoute);
+router.use("/analytics", analyticsRoute);
 
 module.exports = router;
+```
