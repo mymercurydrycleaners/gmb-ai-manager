@@ -33,5 +33,6 @@ router.use("/status", statusRoute);
 router.use("/google", googleRoute);
 router.use("/oauth", oauthRoute);
 router.use("/reviews", reviewsRoute);
+const dashboardRoute = require("./dashboard");
 
 module.exports = router;
