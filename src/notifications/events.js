@@ -1,0 +1,18 @@
+
+const EVENTS = {
+
+  NEW_REVIEW: "NEW_REVIEW",
+
+  AI_REPLY_SENT: "AI_REPLY_SENT",
+
+  POST_PUBLISHED: "POST_PUBLISHED",
+
+  SEO_ALERT: "SEO_ALERT",
+
+  DAILY_REPORT: "DAILY_REPORT",
+
+  ERROR: "ERROR"
+
+};
+
+module.exports = EVENTS;
