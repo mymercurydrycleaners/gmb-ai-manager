@@ -1,50 +1,52 @@
 const templates = {
+
   offers: [
     {
-      title: "Professional Dry Cleaning Offer",
+      title: "✨ Premium Dry Cleaning Offer",
       body:
-        "✨ Give your clothes the care they deserve.\n\nEnjoy premium dry cleaning with expert fabric care at My Mercury Dry Cleaners.\n\n📍 Visit us today!"
+        "Give your garments the care they deserve.\nProfessional Dry Cleaning for all premium garments."
     },
     {
-      title: "Blanket & Quilt Cleaning",
+      title: "🧺 Household Cleaning",
       body:
-        "🛏️ Keep your blankets fresh and hygienic.\n\nProfessional blanket and quilt dry cleaning available.\n\nVisit My Mercury Dry Cleaners today."
+        "Curtains, Blankets, Quilts and Household Items professionally cleaned by My Mercury Dry Cleaners."
     }
   ],
 
   tips: [
     {
-      title: "Fabric Care Tip",
+      title: "👔 Garment Care Tip",
       body:
-        "👔 Dry clean delicate garments instead of washing them at home to preserve color, texture and fabric quality."
+        "Always dry clean wool and delicate garments before storing them for long periods."
     },
     {
-      title: "Garment Care Tip",
+      title: "🧥 Fabric Care",
       body:
-        "🧥 Store your winter garments only after professional dry cleaning to prevent stains and odor."
+        "Professional dry cleaning helps maintain fabric quality and extends garment life."
     }
   ],
 
   festivals: [
     {
-      title: "Festival Special",
+      title: "🎉 Festival Ready",
       body:
-        "✨ Keep your festive outfits looking fresh and elegant with professional dry cleaning from My Mercury Dry Cleaners."
+        "Keep your festive outfits fresh, clean and elegant with professional dry cleaning."
     },
     {
-      title: "Wedding Season Care",
+      title: "💍 Wedding Collection",
       body:
-        "👰 Wedding outfits deserve expert care.\nProfessional cleaning for lehengas, sherwanis, suits and gowns."
+        "Lehenga, Sherwani, Suit and Gown cleaning with premium finishing."
     }
   ],
 
   announcements: [
     {
-      title: "Premium Garment Care",
+      title: "🏆 Mercury Dry Cleaners",
       body:
-        "We use premium cleaning techniques to give your garments a fresh, clean and long-lasting finish."
+        "Trusted professional garment care with premium quality cleaning services."
     }
   ]
+
 };
 
 module.exports = templates;
