@@ -1,28 +1,46 @@
 const templates = require("./templates");
 
-function randomItem(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function random(list) {
+  return list[Math.floor(Math.random() * list.length)];
 }
 
 function generatePost(type = "tips") {
 
+  let post;
+
   switch (type) {
 
     case "offers":
-      return randomItem(templates.offers);
+      post = random(templates.offers);
+      break;
 
     case "festivals":
-      return randomItem(templates.festivals);
+      post = random(templates.festivals);
+      break;
 
     case "announcements":
-      return randomItem(templates.announcements);
+      post = random(templates.announcements);
+      break;
 
     case "tips":
     default:
-      return randomItem(templates.tips);
+      post = random(templates.tips);
 
   }
 
+  return {
+    success: true,
+    category: type,
+    title: post.title,
+    body: post.body,
+    hashtags: [
+      "#DryCleaning",
+      "#MercuryDryCleaners",
+      "#FabricCare",
+      "#ProfessionalCleaning"
+    ],
+    createdAt: new Date().toISOString()
+  };
 }
 
 module.exports = {
