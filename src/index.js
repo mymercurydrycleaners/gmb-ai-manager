@@ -1,3 +1,6 @@
+const { startReviewScheduler } = require("./reviews/scheduler");
+const { startPostScheduler } = require("./posts/scheduler");
+
 require("dotenv").config();
 
 require("./config/env");
@@ -45,5 +48,16 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
+
   logger.info(`🚀 Mercury GMB AI Manager Started on Port ${PORT}`);
+
+  // Start Review Automation
+  startReviewScheduler();
+
+  // Start Google Posts Automation
+  startPostScheduler();
+
+  logger.info("✅ Automation Started");
+
 });
+
