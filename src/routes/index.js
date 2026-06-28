@@ -7,7 +7,6 @@ const oauthRoute = require("./oauth");
 const reviewsRoute = require("./reviews");
 const dashboardRoute = require("./dashboard");
 const analyticsRoute = require("./analytics");
-const postsRoute = require("./posts");
 
 const router = express.Router();
 
@@ -38,6 +37,5 @@ router.use("/oauth", oauthRoute);
 router.use("/reviews", reviewsRoute);
 router.use("/dashboard", dashboardRoute);
 router.use("/analytics", analyticsRoute);
-router.use("/posts", postsRoute);
 
 module.exports = router;
