@@ -1,17 +1,23 @@
 async function publishPost(post) {
 
-  console.log("==================================");
-  console.log("Google Business Post");
-  console.log("==================================");
+  if (!post) {
+    return {
+      success: false,
+      message: "No post provided."
+    };
+  }
 
-  console.log(post.title);
-  console.log(post.body);
-
-  console.log("==================================");
+  console.log("=================================");
+  console.log("Mercury Google Post Publisher");
+  console.log("=================================");
+  console.log("Title :", post.title);
+  console.log("Body  :", post.body);
+  console.log("=================================");
 
   return {
     success: true,
-    message: "Post Ready",
+    status: "READY",
+    message: "Google API Pending",
     post
   };
 
