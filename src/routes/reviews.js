@@ -1,3 +1,4 @@
+const { getReviews } = require("../google/reviews");
 const express = require("express");
 
 const router = express.Router();
@@ -40,3 +41,21 @@ router.post("/generate", async (req, res) => {
 });
 
 module.exports = router;
+router.get("/live", async (req, res) => {
+
+  try {
+
+    const result = await getReviews();
+
+    res.json(result);
+
+  } catch (err) {
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
+  }
+
+});
