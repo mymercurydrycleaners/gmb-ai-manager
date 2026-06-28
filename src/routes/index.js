@@ -5,6 +5,7 @@ const statusRoute = require("./status");
 const googleRoute = require("./google");
 const oauthRoute = require("./oauth");
 const reviewsRoute = require("./reviews");
+const dashboardRoute = require("./dashboard");
 
 const router = express.Router();
 
@@ -33,6 +34,6 @@ router.use("/status", statusRoute);
 router.use("/google", googleRoute);
 router.use("/oauth", oauthRoute);
 router.use("/reviews", reviewsRoute);
-const dashboardRoute = require("./dashboard");
+router.use("/dashboard", dashboardRoute);
 
 module.exports = router;
