@@ -1,0 +1,13 @@
+function logReply(reviewId, status) {
+
+  console.log("================================");
+  console.log("Review :", reviewId);
+  console.log("Status :", status);
+  console.log("Time   :", new Date().toISOString());
+  console.log("================================");
+
+}
+
+module.exports = {
+  logReply
+};
