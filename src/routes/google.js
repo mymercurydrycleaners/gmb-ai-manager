@@ -1,50 +1,61 @@
-const oauth2Client = require("./client");
-const { getAccounts } = require("./accounts");
+const express = require("express");
 
-async function getLocations() {
+const router = express.Router();
 
-  try {
+const { getBusinessInfo } = require("../google/business");
+const { getGoogleStatus } = require("../google/oauth");
+const { getAccounts } = require("../google/accounts");
+const { getLocations } = require("../google/locations");
 
-    const accountsData = await getAccounts();
+router.get("/status", (req, res) => {
+res.json({
+success: true,
+google: getGoogleStatus()
+});
+});
 
-    if (
-      !accountsData.accounts ||
-      accountsData.accounts.length === 0
-    ) {
-      return {
-        success: false,
-        message: "No Google Business account found."
-      };
-    }
-
-    const account = accountsData.accounts[0];
-
-    const response = await oauth2Client.request({
-      url:
-        "https://mybusinessbusinessinformation.googleapis.com/v1/" +
-        account.name +
-        "/locations"
-    });
-
-    return {
-      success: true,
-      account: account.name,
-      locations: response.data.locations || []
-    };
-
-  } catch (err) {
-
-    return {
-      success: false,
-      error: err.message,
-      details: err.response?.data || null
-    };
-
-  }
-
+router.get("/business", async (req, res) => {
+try {
+const result = await getBusinessInfo();
+res.json(result);
+} catch (err) {
+res.status(500).json({
+success: false,
+error: err.message
+});
 }
+});
 
-module.exports = {
-  getLocations
-};
+router.get("/accounts", async (req, res) => {
+try {
+const data = await getAccounts();
 
+```
+res.json({
+  success: true,
+  data
+});
+```
+
+} catch (err) {
+res.status(500).json({
+success: false,
+error: err.message,
+details: err.response?.data || null
+});
+}
+});
+
+router.get("/locations", async (req, res) => {
+try {
+const data = await getLocations();
+res.json(data);
+} catch (err) {
+res.status(500).json({
+success: false,
+error: err.message
+});
+}
+});
+
+module.exports = router;
