@@ -1,4 +1,3 @@
-```javascript
 const oauth2Client = require("./client");
 const { getAccounts } = require("./accounts");
 
@@ -45,4 +44,4 @@ async function getLocations() {
 module.exports = {
   getLocations
 };
-```
+
