@@ -1,15 +1,31 @@
-const oauth2Client = require("./client");
+const {
+  accountManagement
+} = require("./services");
 
 async function getAccounts() {
 
-  const response = await oauth2Client.request({
-    url: "https://mybusinessaccountmanagement.googleapis.com/v1/accounts"
-  });
+  try {
 
-  return response.data;
+    const response =
+      await accountManagement.accounts.list();
+
+    return {
+      success: true,
+      accounts: response.data.accounts || []
+    };
+
+  } catch (err) {
+
+    return {
+      success: false,
+      error: err.message
+    };
+
+  }
 
 }
 
 module.exports = {
   getAccounts
 };
+
