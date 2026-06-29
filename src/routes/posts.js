@@ -1,49 +1,22 @@
-```javascript
 const express = require("express");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+const {
 
-  res.json({
-    success: true,
-    message: "Mercury Google Posts Engine",
-    version: "1.0.0",
-    endpoints: [
-      "GET /posts/generate",
-      "GET /posts/publish",
-      "GET /posts/schedule"
-    ]
-  });
+  createGooglePost
 
-});
+} = require("../posts/service");
 
-router.get("/generate", (req, res) => {
+router.get("/generate", async (req, res) => {
 
-  res.json({
-    success: true,
-    message: "Generator Coming Soon"
-  });
+  const category = req.query.category || "tips";
 
-});
+  const result = await createGooglePost(category);
 
-router.get("/publish", (req, res) => {
-
-  res.json({
-    success: true,
-    message: "Publisher Coming Soon"
-  });
-
-});
-
-router.get("/schedule", (req, res) => {
-
-  res.json({
-    success: true,
-    message: "Scheduler Coming Soon"
-  });
+  res.json(result);
 
 });
 
 module.exports = router;
-```
+
