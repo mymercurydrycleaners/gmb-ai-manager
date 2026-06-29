@@ -1,3 +1,4 @@
+ id="a8m2pc"
 const {
 
   nextJob,
@@ -6,6 +7,12 @@ const {
 
 } = require("./queue");
 
+const {
+
+  processAIReply
+
+} = require("./processor");
+
 async function processQueue() {
 
   const job = nextJob();
@@ -13,9 +20,19 @@ async function processQueue() {
   if (!job)
     return;
 
-  console.log("Running Job :", job.type);
+  switch (job.type) {
 
-  await new Promise(resolve => setTimeout(resolve, 500));
+    case "AI_REPLY":
+
+      await processAIReply(job);
+
+      break;
+
+    default:
+
+      console.log("Unknown Job");
+
+  }
 
   completeJob(job.id);
 
