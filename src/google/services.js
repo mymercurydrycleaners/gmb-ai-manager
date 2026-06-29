@@ -1,6 +1,6 @@
 const { google } = require("googleapis");
 
-const auth = require("./auth");
+const auth = require("./client");;
 
 const businessInfo = google.mybusinessbusinessinformation({
   version: "v1",
