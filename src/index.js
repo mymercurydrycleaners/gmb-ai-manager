@@ -1,6 +1,3 @@
-const { startReviewScheduler } = require("./reviews/scheduler");
-const { startPostScheduler } = require("./posts/scheduler");
-
 require("dotenv").config();
 
 require("./config/env");
@@ -16,6 +13,10 @@ const routes = require("./routes");
 const errorHandler = require("./middleware/errorHandler");
 
 const logger = require("./utils/logger");
+
+const { startReviewScheduler } = require("./reviews/scheduler");
+const { startPostScheduler } = require("./posts/scheduler");
+const { startQueueScheduler } = require("./queue/scheduler");
 
 const app = express();
 
@@ -51,13 +52,18 @@ app.listen(PORT, "0.0.0.0", () => {
 
   logger.info(`🚀 Mercury GMB AI Manager Started on Port ${PORT}`);
 
-  // Start Review Automation
+  // Review Automation
   startReviewScheduler();
 
-  // Start Google Posts Automation
+  // Google Posts Automation
   startPostScheduler();
 
-  logger.info("✅ Automation Started");
+  // Queue Worker
+  startQueueScheduler();
+
+  logger.info("✅ Review Scheduler Started");
+  logger.info("✅ Post Scheduler Started");
+  logger.info("✅ Queue Scheduler Started");
+  logger.info("🎉 Mercury AI Manager Fully Started");
 
 });
-
