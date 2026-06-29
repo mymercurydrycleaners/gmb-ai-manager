@@ -10,6 +10,9 @@ const analyticsRoute = require("./analytics");
 const postsRoute = require("./posts");
 const settingsRoute = require("./settings");
 const aiRoute = require("./ai");
+const seoRoute = require("./seo");
+const queueRoute = require("./queue");
+const performanceRoute = require("./performance");
 
 const router = express.Router();
 
@@ -18,17 +21,21 @@ router.get("/", (req, res) => {
   res.json({
     success: true,
     app: "Mercury GMB AI Manager",
-    version: "4.0.0",
-    status: "Running"
+    version: "4.1.0",
+    status: "Running",
+    environment: process.env.NODE_ENV || "production",
+    timestamp: new Date().toISOString()
   });
 });
 
-// Health
+// Health Check
 router.get("/health", (req, res) => {
   res.json({
     success: true,
     status: "healthy",
-    uptime: process.uptime()
+    uptime: process.uptime(),
+    memory: process.memoryUsage(),
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -43,6 +50,9 @@ router.use("/analytics", analyticsRoute);
 router.use("/posts", postsRoute);
 router.use("/settings", settingsRoute);
 router.use("/ai", aiRoute);
+router.use("/seo", seoRoute);
+router.use("/queue", queueRoute);
+router.use("/performance", performanceRoute);
 
 // 404
 router.use((req, res) => {
