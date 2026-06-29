@@ -1,14 +1,26 @@
-const cache = new Set();
+t id="b0r4xt"
+const processedReviews = new Map();
 
-function isDuplicate(reviewId) {
-  return cache.has(reviewId);
+function isProcessed(reviewId) {
+  return processedReviews.has(reviewId);
 }
 
-function saveReview(reviewId) {
-  cache.add(reviewId);
+function markProcessed(reviewId) {
+  processedReviews.set(reviewId, {
+    processedAt: new Date().toISOString()
+  });
+}
+
+function getProcessedReviews() {
+  return Array.from(processedReviews.entries()).map(([id, data]) => ({
+    id,
+    ...data
+  }));
 }
 
 module.exports = {
-  isDuplicate,
-  saveReview
+  isProcessed,
+  markProcessed,
+  getProcessedReviews
 };
+
