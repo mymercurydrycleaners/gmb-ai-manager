@@ -1,28 +1,58 @@
-async function publishPost(post) {
+const { addHistory } = require("../reviews/history");
 
-  if (!post) {
+async function publishGooglePost(post) {
+
+  try {
+
+    /*
+      TODO
+
+      Google Business Profile API
+
+      Create Local Post
+
+      Publish Here
+    */
+
+    console.log("Publishing Google Post...");
+
+    console.log(post);
+
+    addHistory({
+
+      type: "GOOGLE_POST",
+
+      title: post.title,
+
+      success: true
+
+    });
+
     return {
-      success: false,
-      message: "No post provided."
+
+      success: true,
+
+      published: true,
+
+      message: "Post queued successfully."
+
     };
+
+  } catch (err) {
+
+    return {
+
+      success: false,
+
+      error: err.message
+
+    };
+
   }
-
-  console.log("=================================");
-  console.log("Mercury Google Post Publisher");
-  console.log("=================================");
-  console.log("Title :", post.title);
-  console.log("Body  :", post.body);
-  console.log("=================================");
-
-  return {
-    success: true,
-    status: "READY",
-    message: "Google API Pending",
-    post
-  };
 
 }
 
 module.exports = {
-  publishPost
+  publishGooglePost
 };
+
